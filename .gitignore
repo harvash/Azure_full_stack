@@ -3,3 +3,4 @@ secrets.tfvars
 *.pem
 .dbeaver
 .project
+id_rsa*

@@ -20,3 +20,12 @@ variable "azure_client_secret" {
 variable "azure_tenant_id" {
   default = ""
 }
+
+variable "prefix" {
+  default = ""
+}
+
+variable "vm_admin_name" {
+  default = ""
+}
+
