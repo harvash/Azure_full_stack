@@ -20,20 +20,57 @@ resource "azurerm_public_ip" "UMLfullStackPID" {
     }
 }
 
-resource "azurerm_storage_account" "sa" {
+# Used for storing diagnostic data
+resource "azurerm_storage_account" "UMLfullStackSA" {
   name                = "${var.prefix}sa${random_string.random.result}"
   resource_group_name = data.azurerm_resource_group.UMLfulStackRG.name
   location            = "eastus"
-
-  account_kind             = "StorageV2"
-  account_tier             = "Premium"
+  account_tier             = "Standard"
   account_replication_type = "LRS"
-
+  
+  tags = {
+    UMLProject = FullStack
+  }
 }
 
-resource "azurerm_storage_container" "container" {
-  name                  = "${var.prefix}-storage-container"
-  container_access_type = "private"
-  storage_account_name  = azurerm_storage_account.sa.name
-}
+# Create virtual machine
+resource "azurerm_linux_virtual_machine" "UMLfullStackVM" {
+    name                  = "umlapp01"
+    location              = "eastus"
+    resource_group_name   = azurerm_resource_group.UMLfullStackRG.name
+    network_interface_ids = [azurerm_network_interface.UMLfullStackNIC.id]
+    size                  = "Standard_B1s"
 
+    os_disk {
+        name              = "${var.prefix}-disk01"
+        caching           = "ReadWrite"
+        storage_account_type = "Premium_LRS"
+    }
+
+    source_image_reference {
+        publisher = "Canonical"
+        offer     = "UbuntuServer"
+        sku       = "16.04.0-LTS"
+        version   = "latest"
+    }
+  os_profile {
+    computer_name  = "umlapp01"
+    admin_username = var.vm_admin_name
+  } 
+  
+  os_profile_linux_config {
+    disable_password_authentication = true
+    ssh_keys {
+      key_data = file("./id_rsa.pub")
+      path     = "/home/${var.vm_admin_name}/.ssh/authorized_keys"
+
+    }
+
+    boot_diagnostics {
+        storage_account_uri = azurerm_storage_account.UMLfullStackSA.primary_blob_endpoint
+    }
+
+    tags = {
+        environment = "Terraform Demo"
+    }
+}
