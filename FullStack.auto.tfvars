@@ -4,4 +4,4 @@
 # general
 
 vm_admin_name = "fullstack"
-prefix        = "UMLfullStack"
+prefix        = "umlfullstack"

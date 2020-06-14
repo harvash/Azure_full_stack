@@ -4,3 +4,7 @@ secrets.tfvars
 .dbeaver
 .project
 id_rsa*
+../.DS_Store
+../terraform.tfstate
+.DS_Store
+terraform.tfstate

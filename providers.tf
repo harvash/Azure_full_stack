@@ -1,4 +1,4 @@
- providers.tf
+# providers.tf
 # Resource definitions for providers
 
 # Configure the Microsoft Azure Resource Manager provider

@@ -16,36 +16,37 @@ output "id" {
   value = data.azurerm_resource_group.UMLfullStackRG.id
 }
 
-data "azurerm_virtual_network","UMLfullStackNet" {
+data "azurerm_virtual_network" "UMLfullStackNet" {
   name = "UMLfullStackNet"
-  resource_group_name = azurerm_resource_group.UMLfullStackRG.name
+  resource_group_name = data.azurerm_resource_group.UMLfullStackRG.name
+}
   
 output "virtual_network_id" {
   value = data.azurerm_virtual_network.UMLfullStackNet.id
 }
 
-data "azurerm_subnet","UMLfullStackSubnet" {
+data "azurerm_subnet" "UMLfullStackSubnet" {
   name = "UMLfullStackSubnet"
-  resource_group_name = azurerm_resource_group.UMLfullStackRG.name
+  virtual_network_name  = data.azurerm_virtual_network.UMLfullStackNet.name
+  resource_group_name = data.azurerm_resource_group.UMLfullStackRG.name
 }
 
 output "subnet_id" {
-  value = azurerm_subnet.UMLfullStackSubnet
+  value = data.azurerm_subnet.UMLfullStackSubnet.id
 }
-
 
 data "azurerm_network_security_group" "UMLfullStackNSG" {
   name                = "UMLfullStackNSG"
-  resource_group_name = azurerm_resource_group.UMLfullStackRG.name
+  resource_group_name = data.azurerm_resource_group.UMLfullStackRG.name
 }
 
 output "network_security_group_id" {
-  value = data.azurerm_network_security_group.UMLfullStackRG.location
+  value = data.azurerm_network_security_group.UMLfullStackNSG.id
 }
 
 data "azurerm_network_interface" "UMLfullStackNIC" {
   name                = "UMLfullStackNIC"
-  resource_group_name = azurerm_resource_group.UMLfullStackRG.name
+  resource_group_name = data.azurerm_resource_group.UMLfullStackRG.name
 }
 
 output "network_interface_id" {
