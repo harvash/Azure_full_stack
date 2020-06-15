@@ -27,7 +27,7 @@ resource "azurerm_virtual_machine" "UMLfullStackVM" {
   location              = "eastus"
   resource_group_name   = data.azurerm_resource_group.UMLfullStackRG.name
   network_interface_ids = [data.azurerm_network_interface.UMLfullStackNIC.id]
-  vm_size               = "Standard_B1s"
+  vm_size               = "Standard_B2s"
   
   os_profile {
     computer_name     = "umlapp01"
