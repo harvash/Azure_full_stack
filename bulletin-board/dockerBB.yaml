@@ -16,6 +16,7 @@ spec:
       containers:
       - name: bb-site
         image: bulletinboard
+        imagePullPolicy: Never
 ---
 apiVersion: v1
 kind: Service
