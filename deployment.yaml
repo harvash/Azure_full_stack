@@ -17,6 +17,7 @@ spec:
       - name: bb-site
         image: fskubecr.azurecr.io/bulletinboard:v1
         imagePullPolicy: Never
+        containerPort: 8081
 ---
 apiVersion: v1
 kind: Service
