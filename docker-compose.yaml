@@ -1,7 +1,7 @@
 version: '3'
 services:
   bb-site:
-    build: .
+    build: ./bulletin-board
     image: bulletin-board
     container_name: bulletin-board
     ports:
