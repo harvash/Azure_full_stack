@@ -5,6 +5,6 @@ COPY ./bulletin-board/package.json .
 RUN npm install
 
 EXPOSE 8081
-CMD [ "npm", "start" ]
+CMD [ "node", "server.js" ]
 
 COPY ./bulletin-board .
