@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: bb-site
-        image: bulletinboard
+        image: fskubecr.azurecr.io/bulletinboard
         imagePullPolicy: Never
 ---
 apiVersion: v1
