@@ -6,7 +6,7 @@ This is the code for the Vue.js [tutorial on Scotch.io](https://scotch.io/tutori
 
 1. Run `npm install`.
 2. Run `node server.js`.
-3. Visit [http://localhost:8080](http://localhost:8080).
+3. Visit [http://localhost:8081](http://localhost:8081).
 
 ## RESTful API (contributed by Jason Lam)
 
