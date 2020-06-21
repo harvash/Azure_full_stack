@@ -2,9 +2,12 @@
   "name": "vue-event-bulletin",
   "version": "1.0.0",
   "description": "Demo application for the scotch.io tutorial",
-  "main": "server.js",
-  "author": "Ryan Chenkie, Jason Lam",
+  "author": "Ryan Chenkie, Jason Lam, Chris Anderson",
   "license": "MIT",
+  "main": "server.js",
+  "scripts":{
+  	"start":"node server.js"
+  },
   "dependencies": {
     "bootstrap": "^3.3.6",
     "ejs": "^2.3.4",
