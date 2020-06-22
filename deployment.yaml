@@ -16,7 +16,6 @@ spec:
       containers:
       - name: bb-site
         image: fskubecr.azurecr.io/bulletinboard:v1
-        imagePullPolicy: Never
         ports:
           - containerPort: 8081
 ---
