@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: bb-demo
-  namespace: default
 spec:
   replicas: 1
   selector:
@@ -15,18 +14,17 @@ spec:
     spec:
       containers:
       - name: bb-site
-        image: bulletinboard:latest
+        image: bulletin-board:v1
         ports:
           - containerPort: 8081
-        imagePullPolicy: Always
+        imagePullPolicy: Never
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: bb-entrypoint
-  namespace: default
 spec:
-  type: nodePort
+  type: NodePort
   selector:
     bb: web
   ports:

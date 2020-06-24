@@ -8,6 +8,7 @@ new Vue({
 
   ready: function () {
     this.fetchEvents();
+    console.log('READY!');
   },
 
   methods: {
