@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: Service
+metadata: 
+  name: postgres
+  labels:
+    db: postgres
+spec:
+  ports:
+  - port: 4532
+    name: postgres
+  clusterIP:
+  selector:
+    db: postgres
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+spec:
+  selector: 
+    matchLabels:
+      db: postgres
+      tier: backend
+  serviceName: postgres
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        db: postgres
+        tier: backend
+    spec:
+      containers:
+      - name: kanban-pg
+        image: kanban-pg:latest
+        imagePullPolicy: Never
+        ports:
+        - name: postgres
+          containerPort: 5432
+        volumeMounts:
+        - name: data
+          mountPath: /data
+        env:
+        - name: POSTGRES_USER
+          value: postgres
+        - name: POSTGRES_PASSWORD
+          value: changeme
+        - name: POSTGRES_DB
+          value: pgkanban 
+  volumeClaimTemplates:
+  - metadata:
+    name: data
+    spec:
+      resources:
+        requests:
+          storage:1Gi
+        accessModes:
+        - ReadWriteOnce
+
+  
+
+  
